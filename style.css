@@ -1,0 +1,292 @@
+/* 
+  รีเซ็ต margin และ padding ของทุก element ให้เป็น 0 
+  เพื่อป้องกันปัญหาการจัดวางที่ไม่คาดคิดจากค่า default ของ browser
+*/
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 
+  ตั้งค่าฟอนต์หลักของ body, จัดให้อยู่กลางจอทั้งแนวตั้งและแนวนอน,
+  กำหนดความสูงเต็มหน้าจอ, พื้นหลังสีดำ, 
+  และกำหนดตัวแปร custom property สำหรับเวลา transition ของ nav-link
+*/
+body {
+  font-family: 'Josefin Slab', serif;
+  display: flex;
+  height: 100vh;
+  background: black;
+  align-items: center;
+  justify-content: center;
+  --nav-link-load-time: 500ms;
+}
+
+/* 
+  กล่องหลัก (container) กำหนดขนาดเต็มจอ กว้าง 100% สูง 130vh,
+  ใส่พื้นหลังเป็น gradient ทับกับรูปภาพ, 
+  จัดให้อยู่กลางจอ, และใส่ animation fadeIn
+*/
+#container {
+  width: 100%;
+  height: 130vh;
+  background: linear-gradient(rgba(0,0,0, .6), rgba(0, 0, 0, .3)),
+    url(images/1.jpg) center no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 10s;
+  -webkit-animation: fadeIn 10s;
+  -moz-animation: fadeIn 10s;
+  -o-animation: fadeIn 10s;
+  -ms-animation: fadeIn 5s;
+}
+
+/* 
+  กำหนด keyframes สำหรับ fadeIn (opacity จาก 0 ไป 1)
+  รองรับ browser หลายค่ายด้วย prefix ต่าง ๆ
+*/
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-webkit-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-o-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-ms-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* 
+  การ์ดหลัก กำหนดขนาด, ตำแหน่ง, และ perspective 
+  เพื่อให้สามารถทำเอฟเฟกต์ 3D ได้
+*/
+.card {
+  width: 350px;
+  height: 550px;
+  position: relative;
+  perspective: 1000px;
+}
+
+/* 
+  กล่อง sides ใช้ flex จัดวางแนวตั้งและจัดให้อยู่กลาง
+*/
+.sides {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 
+  ด้านซ้ายของการ์ด (left-side) 
+  วางซ้อน absolute, พื้นหลังเป็น gradient ทับรูป, 
+  ขนาดครึ่งหนึ่งของการ์ด, 
+  ตั้งจุดหมุนที่ด้านซ้าย, 
+  transition สำหรับการหมุน
+*/
+.left-side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: green;
+  background: linear-gradient(rgba(0,0,0, .5), rgba(0, 0, 0, .7)),
+    url(images/2.jpg) no-repeat;
+  background-size: cover;
+  text-align: right;
+  background-position-x: 0;
+  width: 50%;
+  height: 100%;
+  transform: rotateY(0deg);
+  transform-origin: left;
+  transition: transform 2s;
+}
+
+/* 
+  ด้านขวาของการ์ด (right-side) 
+  วางซ้อน absolute, พื้นหลังเป็น gradient ทับรูป, 
+  ขนาดครึ่งหนึ่งของการ์ด, 
+  ตั้งจุดหมุนที่ด้านขวา, 
+  transition สำหรับการหมุน
+*/
+.right-side {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  background: linear-gradient(rgba(0,0,0, .5), rgba(0, 0, 0, .7)),
+    url(images/2.jpg) no-repeat;
+  background-size: cover;
+  background-position-x: -180px;
+  width: 50%;
+  height: 100%;
+  transform: rotateY(0);
+  transform-origin: right;
+  transition: transform 2s;
+  text-align: left;
+}
+
+/* 
+  ด้านหลังของการ์ด (back-side) 
+  วางซ้อน absolute, ขนาดเต็มการ์ด, 
+  จัดให้อยู่ล่างสุด, พื้นหลังเป็น gradient ทับรูป, 
+  ซ่อนอยู่ด้านหลังด้วย z-index และ translateZ,
+  ใส่ transition และเงา
+*/
+.back-side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: chocolate;
+  background: linear-gradient(rgba(0,0,0, .6), rgba(0, 0, 0, .7)),
+    url(images/3.jpg) center no-repeat;
+  background-size: cover;
+  z-index: -1;
+  transform: translateZ(-300px);
+  transition: z-index .4s step-end, transform 1s;
+  box-shadow: 40px 40px 80px #000;
+}
+
+/* 
+  เมื่อ hover ที่การ์ด: 
+  - หมุนด้านซ้ายและขวาออกไป (360 องศา)
+  - ดึงด้านหลังออกมาอยู่ข้างหน้า
+  - เพิ่มเงาให้เด่นขึ้น
+*/
+.card:hover .left-side {
+  transform: rotateY(-360deg);
+}
+.card:hover .right-side {
+  transform: rotateY(360deg);
+  text-align: right;
+}
+.card:hover .back-side {
+  transform: translateZ(0);
+  z-index: 1;
+  box-shadow: 50px 50px 100px #000;
+}
+
+/* 
+  สไตล์ชื่อ (name) และอาชีพ (profession) 
+  กำหนดสี ขนาด และ margin
+*/
+.name {
+  color: #fff;
+  font-size: 20px;
+  margin: 20px 5px;
+}
+.profession {
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  margin: 20px 5px;
+}
+
+/* 
+  จัดข้อความใน left-side ให้ชิดขวา
+*/
+.left-side .name,
+.left-side .profession {
+  text-align: right;
+}
+
+/* 
+  สไตล์ประวัติ (biography) 
+  กำหนดสี ขนาด พื้นหลังโปร่งใส ขนาดกล่อง และจัดให้อยู่กลาง
+*/
+.biography {
+  color: rgb(201, 192, 192);
+  font-size: 15px;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 90%;
+  text-align: center;
+  padding: 10px;
+}
+
+/* 
+  สไตล์ปุ่ม (button) 
+  กำหนดขนาด ตำแหน่ง สี พื้นหลัง ฟอนต์ และรูปร่าง
+*/
+button {
+  position: relative;
+  height: 60px;
+  width: 200px;
+  top: 580px;
+  right: -70px;
+  border: none;
+  outline: none;
+  color: white;
+  background: #111;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+  font-family: 'Raleway', sans-serif;
+}
+
+/* 
+  สร้างเอฟเฟกต์กรอบเรืองแสงรอบปุ่มด้วย pseudo-element :before
+  โดยใช้ gradient สีรุ้งและ blur
+  เริ่มต้นซ่อนเอฟเฟกต์ไว้ (opacity: 0)
+  และขยับตำแหน่งให้ใหญ่กว่าปุ่มเล็กน้อย
+*/
+button:before {
+  position: absolute;
+  content: '';
+  top: -2px;
+  left: -2px;
+  height: calc(100% + 4px);
+  width: calc(100% + 4px);
+  border-radius: 5px;
+  z-index: -1;
+  opacity: 0;
+  filter: blur(5px);
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  background-size: 400%;
+  transition: opacity .3s ease-in-out;
+  animation: animate 20s linear infinite;
+}
+
+/* 
+  เมื่อ hover ที่ปุ่ม ให้แสดงเอฟเฟกต์กรอบเรืองแสง
+*/
+button:hover:before {
+  opacity: 1;
+}
+
+/* 
+  เมื่อกดปุ่ม ให้พื้นหลังปุ่มโปร่งใส
+*/
+button:hover:active {
+  background: none;
+}
+
+/* 
+  เมื่อกดปุ่มและ hover ให้ลด blur ของกรอบเรืองแสง
+*/
+button:hover:active:before {
+  filter: blur(2px);
+}
+
+/* 
+  keyframes สำหรับ animation สีกรอบเรืองแสงของปุ่ม
+  เลื่อนตำแหน่ง background gradient ไปมา
+*/
+@keyframes animate {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!-- กำหนดชุดอักขระของเอกสารเป็น UTF-8 -->
+  <meta charset="UTF-8">
+  <!-- กำหนดให้รองรับ IE ในโหมด Edge -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- กำหนดให้รองรับการแสดงผลบนอุปกรณ์พกพา -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- ชื่อเรื่องของหน้าเว็บ -->
+  <title>สุขสันต์วันเกิดนะ โฟล์ค</title>
+  <!-- เชื่อมโยงไฟล์ CSS สำหรับตกแต่งหน้าเว็บ -->
+  <link rel="stylesheet" href="indexstyle.css">
+  <link rel="stylesheet" href="style.css">
+  <!-- ใช้ฟอนต์จาก Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet"/>
+  <!-- ไอคอนของเว็บไซต์ (favicon) -->
+  <link rel="shortcut icon" type="image/png" href="birthday.png">
+  <!-- เรียกใช้ jQuery จาก CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+</head>
+<body>
+  <!-- ส่วนหลักของเนื้อหา ซ่อนอยู่ตอนโหลด -->
+  <div id="container" style="display:none">
+    <div class="s-2"></div>
+    <div class="card">
+      <!-- ด้านซ้ายของการ์ด -->
+      <div class="sides left-side">
+        <h1 class="profession">สุขสันต์</h1>
+        <h3 class="name">โฟ</h3>
+      </div>
+      <!-- ด้านขวาของการ์ด -->
+      <div class="sides right-side">
+        <h1 class="profession">วันเกิด</h1>
+        <h3 class="name">ล์ค</h3>
+      </div>
+      <!-- ด้านหลังของการ์ด แสดงข้อมูลส่วนตัว -->
+      <div class="back-side">
+        <p class="biography">
+          ชื่อ: โฟล์ค<br>
+          วันเกิด: 25/05/2010<br>
+          เพื่อนแม่งตั้งแต่อนุบาล อยู่ด้วยกันตั้งแต่ตัวเท่าเปี๊ยกยันตัวโต<br><br>
+          นิสัย: รักเพื่อนสุดใจ แต่กวนตีนโคตรๆ เหมือนเกิดมาเพื่อปั่นประสาท<br><br>
+          สกิลหลัก: เล่นกีตา เล่นแล้วสาวกรี๊ด (มั้ง)
+        </p>
+      </div>
+      <!-- ปุ่มเปิดหน้า wish.html -->
+      <button class="button" onClick="window.open('wish.html');">
+        ข่้อความสำหรับมึง
+      </button>
+    </div>
+    <div class="s-1"></div>
+    <!-- ปุ่มเล่น/หยุดเพลง -->
+    <div class="right-col">
+      <img src="images/play.png" id="icon">
+    </div>
+  </div>
+  <!-- แสดงตัวนับ (ถ้ามี) -->
+  <span id="count"></span>
+  <!-- หน้าจอโหลด (Loading) -->
+  <div class="lording">
+    <div class="center">
+      <div class="ring"></div>
+      <span>กำลังโหลด...</span>
+    </div>
+  </div>
+  <!-- ส่วนของหน้าแรกที่มีเอฟเฟกต์และเพลง -->
+  <div id="home" class="home-style-2 slider-area" style="display:none">
+    <!-- พื้นหลังอนุภาค (Particles) -->
+    <div class="particles-js" id="particles-js">
+      <canvas class="particles-js-canvas-el" style="width: 100%; height: 100%;" width="1366" height="606"></canvas>
+    </div>
+    <!-- เว้นระยะห่างด้านบน -->
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <!-- เพลงวันเกิด เล่นอัตโนมัติและวนซ้ำ -->
+    <audio id="hbdmp" autoplay loop>
+      <source src="hbd.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+    <!-- สคริปต์ควบคุมการเล่น/หยุดเพลง -->
+    <script>
+      var hbdmp = document.getElementById("hbdmp")
+      var icon = document.getElementById("icon")
+      icon.onclick = function() {
+        if (hbdmp.paused) {
+          hbdmp.play();
+          icon.src = "images/pause.png";
+        } else {
+          hbdmp.pause();
+          icon.src = "images/play.png";
+        }
+      }
+    </script>
+    <!-- สคริปต์ซ่อนหน้าจอโหลดและแสดงเนื้อหา -->
+    <script>
+      setTimeout(function() {
+        $('.lording').hide()
+      }, 5000);
+      setTimeout(function() {
+        $('#container').show()
+      }, 5199);
+    </script>
+  </div>
+</body>
+</html>

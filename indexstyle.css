@@ -1,0 +1,93 @@
+body{
+  margin: 0; /* กำหนด margin ของ body เป็น 0 เพื่อไม่ให้มีระยะขอบรอบนอก */
+  padding: 0; /* กำหนด padding ของ body เป็น 0 */
+  font-family: montserrat; /* ใช้ฟอนต์ Montserrat สำหรับเนื้อหาทั้งหมด */
+  /* background: black; */ /* ตัวเลือกสำหรับเปลี่ยนพื้นหลังเป็นสีดำ (ถูกคอมเม้นไว้) */
+}
+
+.center{
+  display: flex; /* ใช้ Flexbox เพื่อจัดวางเนื้อหา */
+  text-align: center; /* จัดข้อความให้อยู่กึ่งกลาง */
+  justify-content: center; /* จัดเนื้อหาแนวนอนให้อยู่กึ่งกลาง */
+  align-items: center; /* จัดเนื้อหาแนวตั้งให้อยู่กึ่งกลาง */
+  min-height: 100vh; /* ความสูงขั้นต่ำเท่ากับ 100% ของ viewport */
+  display: flex; /* ซ้ำกับบรรทัดแรก (สามารถลบออกได้) */
+  justify-content: center; /* ซ้ำกับบรรทัดก่อนหน้า */
+  align-items: center; /* ซ้ำกับบรรทัดก่อนหน้า */
+}
+
+.ring{
+  position: absolute; /* กำหนดตำแหน่งแบบ absolute */
+  width: 200px; /* ความกว้าง 200px */
+  height: 200px; /* ความสูง 200px */
+  border-radius: 50%; /* ทำให้เป็นวงกลม */
+  animation: ring 2s linear infinite; /* ใช้แอนิเมชันชื่อ ring เป็นเวลา 2 วินาที หมุนวนตลอด */
+}
+
+@keyframes ring {
+  0%{
+    transform: rotate(0deg); /* เริ่มต้นหมุนที่ 0 องศา */
+    box-shadow: 1px 5px 2px #e65c00; /* เงาสีส้ม */
+  }
+  50%{
+    transform: rotate(180deg); /* หมุนไป 180 องศา */
+    box-shadow: 1px 5px 2px #18b201; /* เปลี่ยนเงาเป็นสีเขียว */
+  }
+  100%{
+    transform: rotate(360deg); /* หมุนครบ 360 องศา */
+    box-shadow: 1px 5px 2px #0456c8; /* เปลี่ยนเงาเป็นสีน้ำเงิน */
+  }
+}
+
+.ring:before{
+  position: absolute; /* ตำแหน่ง absolute */
+  content: ''; /* สร้าง pseudo-element */
+  left: 0; /* ชิดซ้าย */
+  top: 0; /* ชิดบน */
+  height: 100%; /* สูงเท่ากับ .ring */
+  width: 100%; /* กว้างเท่ากับ .ring */
+  border-radius: 50%; /* เป็นวงกลม */
+  box-shadow: 0 0 5px rgba(255,255,255,.3); /* เงาสีขาวโปร่งใส */
+}
+
+span{
+  color: #737373; /* สีเทา */
+  font-size: 20px; /* ขนาดตัวอักษร 20px */
+  text-transform: uppercase; /* ตัวอักษรเป็นพิมพ์ใหญ่ */
+  letter-spacing: 1px; /* ระยะห่างระหว่างตัวอักษร */
+  line-height: 200px; /* ความสูงบรรทัด 200px (เท่ากับวงกลม) */
+  animation: text 3s ease-in-out infinite; /* แอนิเมชันเปลี่ยนสีข้อความ */
+}
+
+@keyframes text {
+  50%{
+    color: black; /* เปลี่ยนสีข้อความเป็นดำที่ 50% ของแอนิเมชัน */
+  }
+}
+
+.lording{
+  height: 100vh; /* ความสูงเต็มหน้าจอ */
+  width: 100%; /* กว้างเต็มหน้าจอ */
+  position: fixed; /* ตำแหน่งคงที่บนหน้าจอ */
+}
+
+.right-col{
+  margin-right: -12%; /* ขยับขวาออกไป -12% */
+  display: flex; /* ใช้ Flexbox */
+  align-items: center; /* จัดเนื้อหาแนวตั้งให้อยู่กึ่งกลาง */
+}
+
+.s-1{
+  min-height: 10vh; /* ความสูงขั้นต่ำ 10% ของ viewport */
+  width: 20%; /* กว้าง 20% */
+}
+
+.s-2{
+  min-height: 10vh; /* ความสูงขั้นต่ำ 10% ของ viewport */
+  width: 20%; /* กว้าง 20% */
+}
+
+#icon{
+  width: 80px; /* กว้าง 80px */
+  cursor: pointer; /* เปลี่ยนเมาส์เป็น pointer เมื่อชี้ */
+}
