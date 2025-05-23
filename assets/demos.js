@@ -124,6 +124,12 @@ function prettyLog(str) {
   console.log('%c ' + str, 'color: green; font-weight: bold;');
 }
 
+setTimeout(function() {
+  $('#ll').hide();           // ซ่อน loader
+  $('#home').show();         // โชว์เนื้อหา
+  $('#comments-container').show();  // โชว์กล่องคอมเม้นต์
+}, 4000);
+
 function toggleLoop(typed) {
   if (typed.loop) {
     typed.loop = false;
