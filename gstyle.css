@@ -790,7 +790,7 @@ textarea::-moz-placeholder {
   display: none; /* ซ่อนก่อน */
   position: fixed;
   top: 100px;   /* เลื่อนลงจากบน */
-  left: 20px;   /* ห่างจากซ้ายขอบ */
+  right: 20px;   /* ห่างจากซ้ายขอบ */
   width: 280px;
   height: 400px;
   background: rgba(0,0,0,0.7);
